@@ -138,5 +138,14 @@ The figure below summarizes VP HYPE compared to several strong hyperspectral bas
 
 ### Citation
 
-If you use this code in your research, please cite the VP HYPE article (add the BibTeX entry here once available).
+If you use this code in your research, please cite the VP-Hype paper \([VP-Hype on arXiv](https://arxiv.org/abs/2603.01174)\):
+
+```bibtex
+@article{sellam2026vphype,
+  title   = {VP-Hype: A Hybrid Mamba-Transformer Framework with Visual-Textual Prompting for Hyperspectral Image Classification},
+  author  = {Sellam, Abdellah Zakaria and Zidi, Fadi Abdeladhim and Bekhouche, Salah Eddine and Houhou, Ihssen and Tliba, Marouane and Distante, Cosimo and Hadid, Abdenour},
+  journal = {arXiv preprint arXiv:2603.01174},
+  year    = {2026}
+}
+```
 
