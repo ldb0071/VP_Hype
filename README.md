@@ -1,36 +1,51 @@
-## MambaVision
+## VP HYPE
 
-MambaVision is a hyperspectral image recognition framework built around Mamba-based vision backbones and custom training pipelines.
+This repository contains the official implementation for the **VP HYPE** article, built on top of NVIDIA's Mamba-based vision architecture.
 
-### Features
+The core model code lives in `models/mamba_vision2.py`, which defines the multi-scale MambaVision backbone and its model variants (`mamba_vision_T`, `mamba_vision_S`, `mamba_vision_B`, `mamba_vision_L`, etc.), as well as an optional hyperspectral adaptor for HSI inputs.
 
-- Multi-scale Mamba-based vision models
-- Config-driven training via YAML files in `configs`
-- Custom schedulers in `scheduler`
-- Dataset utilities in `utils`
+### Key Components
 
-### Getting Started
+- **`models/mamba_vision2.py`**: Main VP HYPE backbone, including
+  - `MambaVisionMixer` (Mamba-based sequence mixer)
+  - `MambaVisionLayer` (hierarchical stages with windowed processing)
+  - `MambaVision` (full backbone with classifier head and HSI adaptor)
+- **`configs/`**: Example YAML configs for different model scales.
+- **`scheduler/`**: Learning-rate schedulers used in training.
+- **`utils/`**: Dataset and training utilities.
 
-1. **Install dependencies**
+### Environment & Dependencies
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+You will need at least:
 
-2. **Train a model (example)**
+- Python 3.10+
+- PyTorch with CUDA support
+- `timm`, `mamba-ssm`, `einops`
 
-   ```bash
-   python trainv2_simple.py --config configs/mambavision_tiny_1k.yaml
-   ```
+Install dependencies with `pip` (adjust versions as needed):
 
-### Project Structure
+```bash
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+pip install timm mamba-ssm einops
+```
 
-- `models` – MambaVision model definitions and registry
-- `scheduler` – learning rate scheduler implementations
-- `utils` – dataset and training utilities
-- `configs` – example training configuration files
+### Basic Usage
 
-### License
+Create a VP HYPE backbone directly from the code:
 
-Specify your preferred license here (e.g., MIT, Apache-2.0).
+```python
+from models.mamba_vision2 import mamba_vision_B
+
+model = mamba_vision_B(pretrained=False, num_classes=1000)
+```
+
+Or run the training script with a config (example):
+
+```bash
+python trainv2_simple.py --config configs/mambavision_tiny_1k.yaml
+```
+
+### Citation
+
+If you use this code in your research, please cite the VP HYPE article (add the BibTeX entry here once available).
 
