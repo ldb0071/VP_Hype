@@ -85,6 +85,12 @@ python trainv2_simple.py \
   --prompt-inject-levels 1 2
 ```
 
+### Results overview
+
+The figure below summarizes VP HYPE compared to several strong hyperspectral baselines (LoLA-SpecViT, DBCT, MambaHSI, SpectralFormer, 3D-CNN) across OA, AA, Kappa, efficiency and per-dataset performance:
+
+![VP-Hype vs baselines](assets/vp_hype_radar_comparison.png)
+
 ### Citation
 
 If you use this code in your research, please cite the VP HYPE article (add the BibTeX entry here once available).
