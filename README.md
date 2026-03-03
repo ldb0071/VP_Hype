@@ -39,10 +39,50 @@ from models.mamba_vision2 import mamba_vision_B
 model = mamba_vision_B(pretrained=False, num_classes=1000)
 ```
 
-Or run the training script with a config (example):
+### Training VP HYPE
+
+For standard ImageNet-style training, use `trainv2_simple.py` with a YAML config:
 
 ```bash
-python trainv2_simple.py --config configs/mambavision_tiny_1k.yaml
+python trainv2_simple.py --config configs/mambavision_tiny_1k.yaml --data_dir /path/to/imagenet
+```
+
+For hyperspectral image (HSI) experiments with the VP HYPE backbone:
+
+```bash
+python trainv2_simple.py \
+  --dataset hsi \
+  --hsi-dataset Indian_pines \
+  --data_dir /path/to/hsi/root \
+  --model mamba_vision_B \
+  --config configs/mambavision_tiny_1k.yaml
+```
+
+### Textual and visual prompts
+
+VP HYPE supports **prompt-based conditioning** for HSI via the arguments defined in `trainv2_simple.py`:
+
+- Enable prompts with `--use-prompt`.
+- Control how prompts are used with `--prompt-mode {full,visual_only,text_only}`:
+  - `full`: use both visual and textual prompts (default when prompts are enabled).
+  - `visual_only`: use only visual prompts injected into intermediate feature maps.
+  - `text_only`: use only textual prompts derived from task IDs.
+- Set the number of prompt classes with `--task-classes` (e.g., different land-cover or material types).
+- Choose the stages at which visual prompts are injected with `--prompt-inject-levels` (e.g. `--prompt-inject-levels 1 2`).
+
+An example HSI run with both textual and visual prompts enabled:
+
+```bash
+python trainv2_simple.py \
+  --dataset hsi \
+  --hsi-dataset Indian_pines \
+  --data_dir /path/to/hsi/root \
+  --model mamba_vision_B \
+  --config configs/mambavision_tiny_1k.yaml \
+  --use-prompt \
+  --prompt-mode full \
+  --task-classes 6 \
+  --prompt-inject-levels 1 2
 ```
 
 ### Citation
