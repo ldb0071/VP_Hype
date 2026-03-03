@@ -28,11 +28,50 @@ You will need at least:
 - PyTorch with CUDA support
 - `timm`, `mamba-ssm`, `einops`
 
+You can either install dependencies **directly on your host**, or run everything inside a **Docker** container.
+
+#### Host (pip) setup
+
 Install dependencies with `pip` (adjust versions as needed):
 
 ```bash
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 pip install timm mamba-ssm einops
+```
+
+#### Docker setup
+
+Build the VP HYPE image (uses a CUDA-enabled PyTorch base image):
+
+```bash
+docker build -t vp-hype .
+```
+
+Run training with GPU support (ImageNet-style example):
+
+```bash
+docker run --gpus all --rm -it \
+  -v /path/to/imagenet:/data \
+  vp-hype \
+  python trainv2_simple.py --config configs/mambavision_tiny_1k.yaml --data_dir /data
+```
+
+For HSI experiments with prompts enabled:
+
+```bash
+docker run --gpus all --rm -it \
+  -v /path/to/hsi/root:/data \
+  vp-hype \
+  python trainv2_simple.py \
+    --dataset hsi \
+    --hsi-dataset Indian_pines \
+    --data_dir /data \
+    --model mamba_vision_B \
+    --config configs/mambavision_tiny_1k.yaml \
+    --use-prompt \
+    --prompt-mode full \
+    --task-classes 6 \
+    --prompt-inject-levels 1 2
 ```
 
 ### Basic Usage
