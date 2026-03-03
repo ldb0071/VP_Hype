@@ -4,6 +4,10 @@ This repository contains the official implementation for the **VP HYPE** article
 
 The core model code lives in `models/mamba_vision2.py`, which defines the multi-scale MambaVision backbone and its model variants (`mamba_vision_T`, `mamba_vision_S`, `mamba_vision_B`, `mamba_vision_L`, etc.), as well as an optional hyperspectral adaptor for HSI inputs.
 
+### Abstract
+
+Accurate classification of hyperspectral imagery (HSI) is often frustrated by the tension between high-dimensional spectral data and the extreme scarcity of labeled training samples. While hierarchical models like LoLA-SpecViT have demonstrated the power of local windowed attention and parameter-efficient fine-tuning, the quadratic complexity of standard Transformers remains a barrier to scaling. We introduce VP-Hype, a framework that rethinks HSI classification by unifying the linear-time efficiency of State-Space Models (SSMs) with the relational modeling of Transformers in a novel hybrid architecture. Building on a robust 3D-CNN spectral front-end, VP-Hype replaces conventional attention blocks with a Hybrid Mamba-Transformer backbone to capture long-range dependencies with significantly reduced computational overhead. Furthermore, we address the label-scarcity problem by integrating dual-modal Visual and Textual Prompts that provide context-aware guidance for the feature extraction process. Our experimental evaluation demonstrates that VP-Hype establishes a new state of the art in low-data regimes. Specifically, with a training sample distribution of only 2%, the model achieves Overall Accuracy (OA) of 99.69% on the Salinas dataset and 99.45% on the Longkou dataset. These results suggest that the convergence of hybrid sequence modeling and multi-modal prompting provides a robust path forward for high-performance, sample-efficient remote sensing.
+
 ### Architecture
 
 The high-level VP HYPE architecture, including the textual-visual TCSP blocks and prompt fusion, is illustrated below:
