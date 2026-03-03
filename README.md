@@ -4,6 +4,12 @@ This repository contains the official implementation for the **VP HYPE** article
 
 The core model code lives in `models/mamba_vision2.py`, which defines the multi-scale MambaVision backbone and its model variants (`mamba_vision_T`, `mamba_vision_S`, `mamba_vision_B`, `mamba_vision_L`, etc.), as well as an optional hyperspectral adaptor for HSI inputs.
 
+### Architecture
+
+The high-level VP HYPE architecture, including the textual-visual TCSP blocks and prompt fusion, is illustrated below:
+
+![VP-Hype architecture](assets/vp_hype_architecture.png)
+
 ### Key Components
 
 - **`models/mamba_vision2.py`**: Main VP HYPE backbone, including
